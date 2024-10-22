@@ -147,7 +147,7 @@ if(isset($_SESSION['usuario'])){
             <img id="footer" class="banner-img float-center" src="/assets/imagess/I.E.Felix_de_Bedout_Moreno.png" alt="I.E. Félix de Bedout Moreno">
             <img id="footer" class="banner-img float-center" src="/assets/imagess/Pascual.png" alt="I.E. Pascual Bravo">
         </div>
-        <p> &copy; 2024 Library loan Control. All rights reserved. </p>
+        <p> &copy; 2024 Library loan Control. All rights reserved.</p>
     </div>
     </center>   
 <script src="./assets/js/scripts.js"></script>
