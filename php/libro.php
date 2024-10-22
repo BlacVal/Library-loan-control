@@ -51,9 +51,8 @@ if (!isset($_SESSION['usuario'])) {
             <ul>
                 <li><a href="#" onclick="agregarAlCarrito('HTML Y CSS')">HTML Y CSS</a></li>
                 <li><a href="#" onclick="agregarAlCarrito('JavaScript')">JavaScript</a></li>
-                <li><a href="#" onclick="agregarAlCarrito('Diseño')">Logica y Diseño</a></li>
                 <li><a href="#" onclick="agregarAlCarrito('Base de datos')">Base de datos</a></li>
-                <li><a href="#" onclick="agregarAlCarrito('Servicio de backend y Frontend')">Servicio de backend y Frontend</a></li>
+                <li><a href="#" onclick="agregarAlCarrito('Backend y Frontend')">Backend y Frontend</a></li>
             </ul>
         </details>
     </div>

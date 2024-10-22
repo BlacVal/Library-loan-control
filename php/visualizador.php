@@ -6,21 +6,25 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-include './conexion_be.php'; // Asegúrate de ajustar la ruta según la estructura de tu proyecto
+include './conexion_be.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     
-    $stmt = $conexion->prepare("SELECT titulo, pdf, mime_type FROM libros WHERE id = ?");
+    // Obtener el título y la ruta del PDF desde la base de datos
+    $stmt = $conexion->prepare("SELECT titulo, pdf FROM libros WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
-    $stmt->bind_result($titulo, $pdf, $mime_type);
+    $stmt->bind_result($titulo, $pdf_path);
     $stmt->fetch();
-    
-    $base64_pdf = base64_encode($pdf); // Codificar PDF en base64 para enviarlo a JavaScript
-
     $stmt->close();
     $conexion->close();
+
+    // Verificar si se obtuvo el PDF
+    if (!$pdf_path || !file_exists($pdf_path)) {
+        echo "El archivo PDF no existe.";
+        exit();
+    }
 } else {
     echo "ID de libro no proporcionado.";
     exit();
@@ -44,7 +48,6 @@ if (isset($_GET['id'])) {
             <li class="link"><a href="/inicio.php">Home</a></li>
             <li id="link1" class="link"><a href="/php/buscar_libros.php">Books</a></li>
             <li id="link2" class="link"><a href="/php/libro.php">Loans</a></li>
-            <li id="link3" class="link"><a href=""></a></li>
         </ul>
 
         <?php if(isset($_SESSION['usuario'])): ?>
@@ -60,7 +63,6 @@ if (isset($_GET['id'])) {
             <button class="btn"><a href="./index.php">Log In</a></button>
         <?php endif; ?>
 
-        <!-- Aquí añadimos el botón de modo -->
         <button id="mode-toggle" class="btn">Night mode</button>
     </nav>
 
@@ -72,62 +74,10 @@ if (isset($_GET['id'])) {
             </div>
         </header></center>
         <div id="pdf-container">
-            <canvas id="pdf-render"></canvas>
-            <div id="navigation-controls">
-                <button id="prev-page" class="btn">Página Anterior</button>
-                <button id="next-page" class="btn">Página Siguiente</button>
-                <span>Página <span id="page-num"></span> de <span id="page-count"></span></span>
-            </div>
+            <!-- Mostramos el PDF directamente usando la ruta guardada -->
+            <iframe src="<?php echo $pdf_path; ?>" width="100%" height="900px"></iframe>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
-    <script>
-        const pdfData = atob("<?php echo $base64_pdf; ?>"); // Decodificar PDF de base64 a binario
-
-        // Cargar el PDF
-        const loadingTask = pdfjsLib.getDocument({data: pdfData});
-        loadingTask.promise.then(pdf => {
-            const pdfContainer = document.getElementById('pdf-render');
-            const pageCount = pdf.numPages;
-            document.getElementById('page-count').textContent = pageCount;
-
-            let pageNum = 1;
-
-            // Renderizar la página
-            const renderPage = num => {
-                pdf.getPage(num).then(page => {
-                    const viewport = page.getViewport({ scale: 1.5 });
-                    const canvas = document.getElementById('pdf-render');
-                    const context = canvas.getContext('2d');
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-
-                    const renderContext = {
-                        canvasContext: context,
-                        viewport: viewport
-                    };
-
-                    page.render(renderContext);
-                });
-                document.getElementById('page-num').textContent = num;
-            };
-
-            // Manejadores de eventos para navegación
-            document.getElementById('prev-page').addEventListener('click', () => {
-                if (pageNum <= 1) return;
-                pageNum--;
-                renderPage(pageNum);
-            });
-
-            document.getElementById('next-page').addEventListener('click', () => {
-                if (pageNum >= pageCount) return;
-                pageNum++;
-                renderPage(pageNum);
-            });
-
-            renderPage(pageNum);
-        });
-    </script>
     <center>
     <div class="copyright">
         <div>

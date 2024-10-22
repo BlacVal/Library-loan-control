@@ -21,6 +21,7 @@ img {
     display: inline-block;
     vertical-align: middle;
 }
+
 /* Paleta de colores */
 .primary-bg {
     background-color: #EFE9E5; /* Fondo claro */
@@ -38,6 +39,7 @@ img {
     color: #e6e6e6; /* Texto claro */
 }
 
+/* Botones */
 .btn {
     background-color: #B4915D; /* Color de fondo de los botones */
     color: #fff; /* Color del texto de los botones */
@@ -51,90 +53,64 @@ img {
     background-color: #D36D4F; /* Color de fondo al pasar el ratón */
 }
 
-nav {
-    max-width: 1200px;
-    margin: auto;
-    padding: 2rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    background-color: #EFE9E5; /* Fondo claro para el modo día */
-}
-
-.nav-logo h1 {
-    color: #4A4A4A; /* Color del texto del logo */
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-}
-
-.link a {
+/* Header */
+header {
     position: relative;
-    padding-bottom: 0.75rem;
+    padding-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 2rem;
+}
+
+header .content h4 {
+    margin-bottom: 1rem;
+    color: #7D7D7D;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+header .content h1 {
     color: #4A4A4A;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 4rem;
 }
 
-.link a::after {
-    content: "";
+header .content h1 span {
+    color: #B4915D;
+}
+
+header .content p {
+    margin-bottom: 2rem;
+    color: #7D7D7D;
+}
+
+header .image {
+    position: relative;
+}
+
+header .image::before {
+    content: "o";
     position: absolute;
-    height: 2px;
-    width: 0;
-    bottom: 0;
-    left: 0;
-    background-color: #B4915D;
-    transition: all 0.3s ease;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 38rem;
+    font-weight: 400;
+    line-height: 20rem;
+    color: #D9B78F;
+    opacity: 0.2;
+    z-index: -100;
 }
 
-.link a:hover::after {
-    width: 70%;
+header .image img {
+    max-width: 600px;
+    margin: auto;
 }
 
-/* Modo Noche */
-.night-mode {
-    background-color: #4A5B6A; /* Fondo oscuro */
-    color: #e6e6e6; /* Texto claro */
-}
-
-.night-mode .btn {
-    background-color: #B4915D; /* Color de fondo de los botones en modo noche */
-    color: #fff; /* Color del texto de los botones en modo noche */
-}
-
-.night-mode nav {
-    background-color: #4A5B6A; /* Fondo oscuro para el menú en modo noche */
-}
-
-.night-mode .nav-logo h1 {
-    color: #e6e6e6; /* Color del texto del logo en modo noche */
-}
-
-.night-mode .link a {
-    color: #e6e6e6; /* Color de los enlaces en modo noche */
-}
-
-.night-mode .link a::after {
-    background-color: #e6e6e6; /* Línea inferior de enlaces en modo noche */
-}
-
-.night-mode #pdf-container canvas {
-    border-color: #D36D4F; /* Borde alrededor del canvas en modo noche */
-}
-
-.night-mode #navigation-controls .btn {
-    background-color: #D36D4F; /* Color de fondo de los botones de navegación en modo noche */
-    color: #fff; /* Color del texto de los botones en modo noche */
-}
-
-.night-mode #navigation-controls span {
-    color: #e6e6e6; /* Color del texto de navegación en modo noche */
-}
-
-/* Estilos específicos para el visor de PDF */
+/* Estilos del visor de PDF */
 #upload-container {
     text-align: center;
     margin-bottom: 2rem;
@@ -184,15 +160,15 @@ nav {
     font-size: 1rem;
 }
 
-/* Estilos del menú de navegación */
+/* Menú de navegación */
 nav {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
+    margin: auto;
+    padding: 2rem 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 2rem;
     background-color: #EFE9E5; /* Fondo claro */
 }
 
@@ -204,56 +180,87 @@ nav {
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 1.5rem;
+    gap: 3rem;
 }
 
-.nav-links .link a {
-    color: #4A4A4A; /* Color del texto del enlace */
-    font-weight: 500;
+.link a {
+    position: relative;
+    padding-bottom: 0.75rem;
+    color: #4A4A4A;
 }
 
-.nav-links .link a:hover {
-    color: #B4915D; /* Color del texto del enlace al pasar el ratón */
+.link a::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #B4915D;
+    transition: all 0.3s ease;
 }
 
-/* Estilos para los botones de menú */
+.link a:hover::after {
+    width: 70%;
+}
+
+/* Submenú */
 .menu-item {
     position: relative;
 }
 
 .submenu {
+    display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    display: none;
-    flex-direction: column;
-    gap: 0.5rem;
+    background-color: #B4915D;
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
 }
 
 .menu-item:hover .submenu {
-    display: flex;
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.submenu li {
+    padding: 0;
 }
 
 .submenu .btn {
     padding: 0.5rem 1rem;
-    background-color: #B4915D; /* Color de fondo del botón en el menú desplegable */
-    color: #fff; /* Color del texto del botón en el menú desplegable */
+    background-color: #B4915D;
+    width: 100%;
+    text-align: left;
 }
 
-.submenu .btn:hover {
-    background-color: #D36D4F; /* Color de fondo del botón en el menú desplegable al pasar el ratón */
+.submenu .btn a {
+    color: #fff;
 }
 
-/* Botón de modo oscuro */
-#mode-toggle {
-    background-color: #B4915D; /* Color de fondo del botón de modo oscuro */
-    color: #fff; /* Color del texto del botón de modo oscuro */
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+/* Estilos responsive */
+@media (max-width: 900px) {
+    .nav-links {
+        display: none;
+    }
+    header {
+        grid-template-columns: 1fr;
+    }
+    header .image {
+        grid-area: 1/1/2/2;
+    }
 }
 
-#mode-toggle:hover {
-    background-color: #D36D4F; /* Color de fondo al pasar el ratón */
+@media (max-width: 600px) {
+    header .image::before {
+        display: none;
+    }
 }

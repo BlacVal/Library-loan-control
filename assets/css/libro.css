@@ -28,7 +28,7 @@ body {
 
 /* Estilos base */
 a, .btn {
-    color: #333; /* Color por defecto para enlaces y botones (modo día) */
+    color: #333; /* Color por defecto para enlaces y botones */
     transition: color 0.3s ease, background-color 0.3s ease; /* Transiciones suaves */
 }
 
@@ -43,8 +43,8 @@ a, .btn {
 }
 
 .day-mode .text-content {
-    background-color: #333;
-    color: #333; /* Color del texto específico en modo día */
+    background-color: #333; /* Fondo oscuro para el contenido de texto en modo día */
+    color: #EFE9E5; /* Texto claro para el contenido de texto en modo día */
 }
 
 /* Modo noche */
@@ -74,6 +74,53 @@ a, .btn {
 /* Efectos hover */
 a:hover, .btn:hover {
     opacity: 0.8; /* Ligera transparencia en hover para mejor visibilidad */
+}
+
+.nav-logo {
+    max-width: 100px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.link a {
+    position: relative;
+    padding-bottom: 0.75rem;
+    color: #333;
+}
+
+.link a::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #B4915D;
+    transition: all 0.3s ease;
+}
+
+.link a:hover::after {
+    width: 70%;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    color: #333;
+    background-color: #B4915D;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #EFE9E5;
+    color: #333;
 }
 
 

@@ -15,14 +15,16 @@ body {
     background-position: center;
     background-attachment: fixed;
 }
-img {
+
+.copyright{
+    img,uno,dos{
     max-width: 10%;
     height: auto;
     -ms-interpolation-mode: bicubic;
     display: inline-block;
     vertical-align: middle;
 }
-
+}
 main {
     width: 100%;
     padding: 20px;

@@ -1,50 +1,47 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "Login_register_db";
+session_start();
+include 'conexion_be.php';
 
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['pdf'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     $titulo = $_POST['titulo'];
-    $Estado = $_POST['Estado'];
-    $file_size = $_FILES['pdf']['size'];
+    $estado = $_POST['Estado'];
+    $pdf = $_FILES['pdf']['name'];
+    $pdf_tmp = $_FILES['pdf']['tmp_name'];
 
-    // Verificar el tamaño del archivo (por ejemplo, 20MB máximo)
-    if ($file_size > 20 * 1024 * 1024) {
-        die("El archivo es demasiado grande. El tamaño máximo permitido es de 20MB.");
+    // Ruta donde se guardará el archivo PDF
+    $upload_dir = "./libros/";
+    $pdf_path = $upload_dir . basename($pdf);
+
+    // Verificar si la carpeta de destino existe, si no, crearla
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
     }
 
-    $pdf = file_get_contents($_FILES['pdf']['tmp_name']);
-    $mime_type = $_FILES['pdf']['type'];
-
-    // Aumentar el límite de tamaño de paquete si es necesario
-    $conn->query("SET GLOBAL max_allowed_packet=64*1024*1024");
-
-    $stmt = $conn->prepare("INSERT INTO libros (titulo, Estado, pdf, mime_type) VALUES (?, ?, ?, ?)");
-    if ($stmt === false) {
-        die("Error en la preparación: " . $conn->error);
+    // Verificar si el archivo es PDF
+    $file_type = strtolower(pathinfo($pdf_path, PATHINFO_EXTENSION));
+    if ($file_type != "pdf") {
+        echo "Solo se permiten archivos PDF.";
+        exit();
     }
 
-    $stmt->bind_param("ssss", $titulo, $Estado, $pdf, $mime_type);
+    // Mover el archivo al servidor
+    if (move_uploaded_file($pdf_tmp, $pdf_path)) {
+        // Insertar en la base de datos, cambiando 'pdf_path' a 'pdf'
+        $query = "INSERT INTO libros (titulo, Estado, pdf) VALUES (?, ?, ?)";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("sss", $titulo, $estado, $pdf_path);
 
-    // Ejecutar la consulta y verificar errores
-    if ($stmt->execute()) {
-        echo "Libro subido exitosamente.";
+        if ($stmt->execute()) {
+            echo "El archivo PDF se ha subido correctamente.";
+        } else {
+            echo "Error al subir el archivo a la base de datos: " . $stmt->error;
+        }
+
+        $stmt->close();
     } else {
-        echo "Error al subir el libro: " . $stmt->error;
+        echo "Error al mover el archivo.";
     }
 
-    $stmt->close();
+    $conexion->close();
 }
-
-// Cerrar la conexión
-$conn->close();
 ?>

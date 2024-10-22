@@ -7,7 +7,7 @@ if(isset($_SESSION['usuario'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,12 +73,11 @@ if(isset($_SESSION['usuario'])){
     <div class="content">
         <span class="blur"></span>
         <span class="blur"></span>
-        <h4>Build your knowledge like a professional</h4>
-        <h1>Hi, we are <span>Library Loan Control</span>, Web Developers</h1>
+        <h4>Desarrolla tus conocimientos como un profesional</h4>
+        <h1>Hola, somos <span>Library Loan Control</span>, desarrolladores web</h1>
         <p><h4>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus rem eos aliquid quo rerum
-            temporibus ipsum distinctio numquam ut omnis placeat, nam sint atque quos dolorem laborum? Rerum, esse
-            dolorem.
+        Bienvenido a la Biblioteca Virtual de la Institución Educativa Félix de Bedout Moreno Library loan control
+        Descubre un espacio diseñado para fomentar el aprendizaje y la investigación. Aquí, tendrás acceso a una amplia colección de libros en formato PDF, incluyendo títulos de programación y otros temas básicos de la media técnica. Además, ofrecemos un sistema de préstamo digital para que puedas llevarte tus libros favoritos a casa, de manera sencilla y rápida. ¡Explora, aprende y disfruta de la lectura!
             </h4></p>
     </div>
     <div class="image">
@@ -87,14 +86,15 @@ if(isset($_SESSION['usuario'])){
 </header>
 
 <section class="container">
-    <h2 class="header">OUR FEATURES</h2>
+    <h2 class="header">Caracteristicas</h2>
     <div class="features">
         <div class="card">
             <center>
                 <span><i class="ri-money-dollar-box-line"></i></span>
-                <h4>Free Information</h4>
+                <h4>
+                Información </h4>
                 <p><h4>
-                    In the following books, you will have a lot of information that will be useful to you.
+                En los siguientes libros tendrás mucha información que te será útil.
                     </h4></p>
                 <a href="./php/buscar_libros.php">Go now <i class="ri-arrow-right-line"></i></a>
             </center>
@@ -102,9 +102,10 @@ if(isset($_SESSION['usuario'])){
         <div class="card">
             <center>
                 <span><i class="ri-bug-line"></i></span>
-                <h4>We help you with information</h4>
+                <h4>
+                Te ayudamos con información</h4>
                 <p><h4>
-                    Contact us to clarify your doubts, what books are available and more.
+                Contáctanos para aclarar tus dudas, qué libros están disponibles y más.
                     </h4></p>
                     <a href="https://iefelixdebedoutmoreno.edu.co" target="_blank">Go now <i class="ri-arrow-right-line"></i></a>
 
@@ -113,19 +114,20 @@ if(isset($_SESSION['usuario'])){
         <div class="card">
             <center>
                 <span><i class="ri-history-line"></i></span>
-                <h4>Why did we do this project?</h4>
+                <h4>
+                ¿Por qué hicimos este proyecto?</h4>
                 <p><h4>
-                    Our inspiration to do this project, what was it?
+                Nuestra inspiración para hacer este proyecto, ¿cuál fue?
                     </h4></p>
-                <a href="#">Go now <i class="ri-arrow-right-line"></i></a>
+                <a href="#">ve ahora <i class="ri-arrow-right-line"></i></a>
             </center>
         </div>
         <div class="card">
             <center>
                 <span><i class="ri-shake-hands-line"></i></span>
-                <h4>Cooperation</h4>
+                <h4>Cooperación</h4>
                 <p><h4>
-                    Our work team 
+                Nuestro equipo de trabajo
                     </h4></p>
                 <a href="/php/Acercade.php">Go now <i class="ri-arrow-right-line"></i></a>
             </center>

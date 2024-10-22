@@ -62,7 +62,7 @@ if(isset($_SESSION['usuario'])){
     <h2>Nuestro equipo</h2>
     <div class="team-cards">
     <div class="card">
-            <img src="/assets/imagess/Samuel Brand.jpg" alt="Samuel Brand Gaviria"><br><h3>Lider</h3>
+            <img src="/assets/imagess/Samuel Brand.jpg" alt="Samuel Brand Gaviria"><br>
             <h3>Samuel Brand Gaviria</h3>
         </div>
         <div class="card">
